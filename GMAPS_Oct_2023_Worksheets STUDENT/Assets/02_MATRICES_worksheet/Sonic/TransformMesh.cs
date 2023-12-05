@@ -25,7 +25,7 @@ public class TransformMesh : MonoBehaviour
     void Translate(float x, float y)
     {
         transformMatrix.SetIdentity();
-        transformMatrix.SetTranslationMatrix(x, y);
+        transformMatrix.SetTranslationMat(x, y);
         Transform();
 
         pos = transformMatrix * pos;
@@ -37,9 +37,9 @@ public class TransformMesh : MonoBehaviour
        HMatrix2D fromOriginMatrix = new HMatrix2D();
        HMatrix2D rotateMatrix = new HMatrix2D();
 
-       toOriginMatrix.SetTranslationMatrix(-pos.x, -pos.y);
-       fromOriginMatrix.SetTranslationMatrix(pos.x, pos.y);
-       rotateMatrix.SetRotationMatrix(angle);
+       toOriginMatrix.SetTranslationMat(-pos.x, -pos.y);
+       fromOriginMatrix.SetTranslationMat(pos.x, pos.y);
+       rotateMatrix.SetRotationMat(angle);
 
        transformMatrix.SetIdentity();
        transformMatrix = fromOriginMatrix * toOriginMatrix * rotateMatrix;
