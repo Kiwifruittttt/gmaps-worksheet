@@ -19,7 +19,7 @@ public class JumpToHeight : MonoBehaviour
         // u = sqrt(v*v - 2as)
         // v = 0, u = ?, a = Physics.gravity, s = Height
 
-        float u = Mathf.Sqrt(2 * Physics.gravity.magnitude * Height);
+        float u = Mathf.Sqrt(-2 * Physics.gravity.y * Height);
         rb.velocity = new Vector3(0, u, 0);
 
         //float jumpForce = Mathf.Sqrt(-2 * Physics2D.gravity.y * Height);

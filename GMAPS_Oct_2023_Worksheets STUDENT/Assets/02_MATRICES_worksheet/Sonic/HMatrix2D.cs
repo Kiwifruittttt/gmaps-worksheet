@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class HMatrix2D 
 {
+    //Declare 3x3 array
     public float[,] Entries { get; set; } = new float[3, 3];
 
     public HMatrix2D()
     {
+        //Initialise identity matrix
         SetIdentity();
     }
 
@@ -23,8 +25,8 @@ public class HMatrix2D
     }
 
     public HMatrix2D(float m00, float m01, float m02,
-             float m10, float m11, float m12,
-             float m20, float m21, float m22)
+                     float m10, float m11, float m12, //Each m number are like "coordinates" of
+                     float m20, float m21, float m22) //elements in the matrix?
     {
 	    Entries[0, 0] = m00;
         Entries[0, 1] = m01;
@@ -42,7 +44,7 @@ public class HMatrix2D
         HMatrix2D matResult = new HMatrix2D();
         for (int y = 0; y < 3; y++)
         {
-            for (int x = 0; x < 3; x++)
+            for (int x = 0; x < 3; x++) //Add the corresponding element from the matrices together
             {
                 matResult.Entries[x, y] = left.Entries[x, y] + right.Entries[x, y];
             }
@@ -55,7 +57,7 @@ public class HMatrix2D
         HMatrix2D matResult = new HMatrix2D();
         for (int y = 0; y < 3; y++)
         {
-            for (int x = 0; x< 3; x++)
+            for (int x = 0; x< 3; x++) //Subtract left element by the corresponding right element
             {
                 matResult.Entries[x, y] = left.Entries[x, y] - right.Entries[x, y];
             }
@@ -68,7 +70,7 @@ public class HMatrix2D
         HMatrix2D matResult = new HMatrix2D();
         for (int y = 0; y < 3; y++)
         {
-            for (int x = 0; x < 3; x++)
+            for (int x = 0; x < 3; x++) //Multiplies each element by the scalar
             {
                 matResult.Entries[x, y] = left.Entries[x, y] * scalar;
             }
@@ -82,8 +84,8 @@ public class HMatrix2D
     {
         return new HVector2D
         (
-            left.Entries[0, 0] * right.x + left.Entries[0, 1] * right.x + left.Entries[0, 2] * 1,
-            left.Entries[1 ,0] * right.x + left.Entries[1, 1] * right.x + left.Entries[1, 2] * 1
+            left.Entries[0, 0] * right.x + left.Entries[0, 1] * right.y + left.Entries[0, 2] * 1,
+            left.Entries[1 ,0] * right.x + left.Entries[1, 1] * right.y + left.Entries[1, 2] * 1
         );
     }
 
@@ -100,17 +102,19 @@ public class HMatrix2D
             */
             left.Entries[0, 0] * right.Entries[0, 0] + left.Entries[0, 1] * right.Entries[1, 0] + left.Entries[0, 2] * right.Entries[2, 0],
 	    /* 
-            00 01 02    xx 01 xx
-            xx xx xx    xx 11 xx
-            xx xx xx    xx 21 xx
+            00 01 02    00 01 02
+            10 11 12    10 11 12
+            20 21 22    20 21 22
             */
             left.Entries[0, 0] * right.Entries[0, 1] + left.Entries[0, 1] * right.Entries[1, 1] + left.Entries[0, 2] * right.Entries[2, 1],
             left.Entries[0, 0] * right.Entries[0, 2] + left.Entries[0, 1] * right.Entries[1, 2] + left.Entries[0, 2] * right.Entries[2, 2], 
             
+            //Multiply left matrix second row with right matrix
             left.Entries[1, 0] * right.Entries[0, 0] + left.Entries[1, 1] * right.Entries[1, 0] + left.Entries[1, 2] * right.Entries[2, 0],
             left.Entries[1, 0] * right.Entries[0, 1] + left.Entries[1, 1] * right.Entries[1, 1] + left.Entries[1, 2] * right.Entries[2, 1],
             left.Entries[1, 0] * right.Entries[0, 2] + left.Entries[1, 1] * right.Entries[1, 2] + left.Entries[1, 2] * right.Entries[2, 2], 
 
+            //Multiply left mtrix last row with right matrix
             left.Entries[2, 0] * right.Entries[0, 0] + left.Entries[2, 1] * right.Entries[1, 0] + left.Entries[2, 2] * right.Entries[2, 0],
             left.Entries[2, 0] * right.Entries[0, 1] + left.Entries[2, 1] * right.Entries[1, 1] + left.Entries[2, 2] * right.Entries[2, 1],
             left.Entries[2, 0] * right.Entries[0, 2] + left.Entries[2, 1] * right.Entries[1, 2] + left.Entries[2, 2] * right.Entries[2, 2]
@@ -121,15 +125,15 @@ public class HMatrix2D
     {
         for (int y = 0; y < 3; y++)
         {
-            for (int x = 0; x < 3; x++)
-            {
+            for (int x = 0; x < 3; x++) //If corresponding elements from two matrices are  
+            {                           //not the same, return false
                 if(left.Entries[x, y] != right.Entries[x, y])
                 {
                     return false;
                 }
             }
         }
-        return true;
+        return true;    //If they are the same, returns true
     }
 
     public static bool operator !=(HMatrix2D left, HMatrix2D right)
@@ -165,36 +169,39 @@ public class HMatrix2D
             //{
                 //if(x == y)
                 //{
-                    //HMatrix2D[x, y] = 1;
+                    //HMatrix2D[x, y] = 1; //Set element to 1 if it's on the diagonal
                 //}
                 //else
                 //{
-                    //HMatrix2D[x, y] = 0;
+                    //HMatrix2D[x, y] = 0; //If it's not on the diagonal set to 0
                 //}
             //}
         //}
 
         for (int y = 0; y < 3; y++)
         {
-            for (int x = 0; x < 3; x++)
-            {
-                Entries[x, y] = (x == y) ? 1 : 0;
-            }
+            for (int x = 0; x < 3; x++)             //Loops rows and columns
+            {                                       //(x == y) checks if x value and y value are equal?
+                Entries[x, y] = (x == y) ? 1 : 0;   //If they are, element is set to 1, else 
+            }                                       //they are set to 0
         }
     }
 
     public void SetTranslationMat(float transX, float transY)
     {
         SetIdentity();
-        Entries[0, 0] = transX;
-        Entries[1, 2] = transY;
+        Entries[0, 2] = transX; //Translates on X axis?
+        Entries[1, 2] = transY; //Translates on Y axis?
     }
 
     public void SetRotationMat(float rotDeg)
     {
         SetIdentity();
-        float rad = rotDeg * Mathf.Deg2Rad;
-        //Entries[0, 0] = 
+        float rad = rotDeg * Mathf.Deg2Rad; //Converts the rotDeg from degrees to radians
+        Entries[0, 0] = Mathf.Cos(rad);
+        Entries[0, 1] = -Mathf.Sin(rad);    //Not sure if this is correct, I referenced 
+        Entries[1, 0] = Mathf.Sin(rad);     //from an online forum :/
+        Entries[1, 1] = Mathf.Cos(rad);     //https://stackoverflow.com/questions/5188876/rotation-matrix-given-angle-and-point-in-x-y-z
     }
 
     //public void SetScalingMat(float scaleX, float scaleY)
