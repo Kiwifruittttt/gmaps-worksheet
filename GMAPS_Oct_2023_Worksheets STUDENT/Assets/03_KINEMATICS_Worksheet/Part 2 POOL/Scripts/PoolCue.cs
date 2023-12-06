@@ -20,17 +20,21 @@ public class PoolCue : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			var startLinePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Start line drawing
+			//Checks if the mouse position is "inside" the ball object
 			if (ball != null && ball.IsCollidingWith(startLinePos.x, startLinePos.y))
-			{
+			{	
+				//Draws line from the ball to the current mouse position
 				drawnLine = lineFactory.GetLine(startLinePos, ball.transform.position, 0.2f, Color.black);
 				drawnLine.EnableDrawing(true);
 			}
 		}
 		else if (Input.GetMouseButtonUp(0) && drawnLine != null)
 		{
+			//If the mouse button is not held, the drawLine is set to false
 			drawnLine.EnableDrawing(false);
 
 			//update the velocity of the white ball.
+			//By using the direction of the drawn line as a vector
 			HVector2D v = new HVector2D(drawnLine.start.x - drawnLine.end.x, drawnLine.start.y - drawnLine.end.y);
 			ball.Velocity = v;
 

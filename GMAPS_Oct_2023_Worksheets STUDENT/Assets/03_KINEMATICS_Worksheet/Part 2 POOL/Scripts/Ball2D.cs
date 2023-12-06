@@ -23,10 +23,9 @@ public class Ball2D : MonoBehaviour
     }
 
     public bool IsCollidingWith(float x, float y)
-    {
-        float distance = Mathf.Sqrt((x - transform.position.x) * (x - transform.position.x) + 
-                                    (y - transform.position.y) * (y - transform.position.y));
-        return distance <= Radius;
+    {   //Calculate distance from the ball to the mouse
+        float distance = Util.FindDistance(new HVector2D(x, y), Position);
+        return distance <= Radius;  //Checks if distance is less than or = to radius of the ball
     }
 
     bool IsCollidingWith(Ball2D other)
@@ -42,13 +41,13 @@ public class Ball2D : MonoBehaviour
 
     private void UpdateBall2DPhysics(float deltaTime)
     {
-        float displacementX = Velocity.x * deltaTime;
+        float displacementX = Velocity.x * deltaTime;   //Calculate the new X and Y values
         float displacementY = Velocity.y * deltaTime;
 
-        Position.x += displacementX;
+        Position.x += displacementX;    //Updates the X and Y values to the new values
         Position.y += displacementY;
 
-        transform.position = new Vector2(Position.x, Position.y);
+        transform.position = new Vector2(Position.x, Position.y);   //Applies the new X and Y values to the ball
     }
 }
 

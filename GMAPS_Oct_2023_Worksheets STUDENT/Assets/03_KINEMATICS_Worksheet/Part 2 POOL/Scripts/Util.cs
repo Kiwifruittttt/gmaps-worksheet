@@ -5,7 +5,7 @@ using UnityEngine;
 public class Util
 {
     public static float FindDistance(HVector2D p1, HVector2D p2)
-    {
+    {   //Used Pythagoras because the distance is just the hypotenuse
         return Mathf.Sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
 
         HVector2D a = new HVector2D(8f, 5f);

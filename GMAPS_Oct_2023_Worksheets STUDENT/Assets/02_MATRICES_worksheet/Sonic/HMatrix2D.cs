@@ -83,7 +83,10 @@ public class HMatrix2D
     public static HVector2D operator *(HMatrix2D left, HVector2D right)
     {
         return new HVector2D
-        (
+        (/*
+            00 01 02    1, 2?
+            10 11 12
+            20 21 22 */
             left.Entries[0, 0] * right.x + left.Entries[0, 1] * right.y + left.Entries[0, 2] * 1,
             left.Entries[1 ,0] * right.x + left.Entries[1, 1] * right.y + left.Entries[1, 2] * 1
         );
