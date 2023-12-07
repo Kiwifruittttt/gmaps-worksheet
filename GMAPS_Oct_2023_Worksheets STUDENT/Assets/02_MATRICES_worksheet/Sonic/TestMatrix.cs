@@ -26,6 +26,6 @@ public class TestMatrix : MonoBehaviour
         HMatrix2D resultMat = mat1 * mat2;
         HVector2D resultVec = mat1 * vec1;
         resultMat.Print();
-        Debug.Log(resultVec.ToString());    //This doesn't work I'm not sure why :/
+        Debug.Log(resultVec.x + ", " + resultVec.y);    //This doesn't work I'm not sure why :/
     }
 }

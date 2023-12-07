@@ -201,7 +201,7 @@ public class HMatrix2D
     {
         SetIdentity();
         float rad = rotDeg * Mathf.Deg2Rad; //Converts the rotDeg from degrees to radians
-        Entries[0, 0] = Mathf.Cos(rad);
+        Entries[0, 0] = Mathf.Cos(rad); 
         Entries[0, 1] = -Mathf.Sin(rad);    //Not sure if this is correct, I referenced 
         Entries[1, 0] = Mathf.Sin(rad);     //from an online forum :/
         Entries[1, 1] = Mathf.Cos(rad);     //https://stackoverflow.com/questions/5188876/rotation-matrix-given-angle-and-point-in-x-y-z

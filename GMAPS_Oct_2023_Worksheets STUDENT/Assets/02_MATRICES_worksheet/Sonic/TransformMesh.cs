@@ -6,7 +6,7 @@ using UnityEngine;
 public class TransformMesh : MonoBehaviour
 {
     [HideInInspector]
-    private Vector3[] vertices; //{ get; private set; }
+    private Vector3[] vertices;// { get; private set; }
 
     private HMatrix2D transformMatrix = new HMatrix2D();
     HMatrix2D toOriginMatrix = new HMatrix2D();
@@ -19,7 +19,7 @@ public class TransformMesh : MonoBehaviour
     {
         meshManager = GetComponent<MeshManager>();
         pos = new HVector2D(gameObject.transform.position.x, gameObject.transform.position.y);
-        //Translate(1, 1);
+        Translate(1, 1);
         Rotate(-45);
     }
 
@@ -40,7 +40,7 @@ public class TransformMesh : MonoBehaviour
        rotateMatrix.SetRotationMat(angle);                  //Rotates the matrix based on the angle
 
        transformMatrix.SetIdentity();
-       transformMatrix = rotateMatrix * fromOriginMatrix * toOriginMatrix;  //Multiplied in reverse order?
+       transformMatrix = toOriginMatrix * rotateMatrix * fromOriginMatrix;
 
        Transform();
    }
